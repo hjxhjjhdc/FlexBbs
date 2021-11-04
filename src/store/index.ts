@@ -13,4 +13,4 @@ const vuexLocal = new VuexPersistence({
 export const store = createStore({
   state,mutations,getters,actions,
   plugins: [vuexLocal.plugin]
-})
+});
