@@ -5,6 +5,7 @@ import 'ant-design-vue/dist/antd.css';
 import { store } from './store'
 import router from './router'
 import i18n from './plugins/i18n/index';
+import '@/mock/index'
 /* import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css' */
 

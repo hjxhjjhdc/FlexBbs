@@ -1,5 +1,9 @@
 <template>
-
+ <a-layout>
+    <a-layout-header>Header</a-layout-header>
+    <a-layout-content>Content</a-layout-content>
+    <a-layout-footer>Footer</a-layout-footer>
+  </a-layout>
 </template>
 
 <script>
@@ -7,8 +11,5 @@ export default {};
 </script>
 
 <style lang="less" scoped>
-.card {
-  width: 100%;
-  height: 50px;
-}
+
 </style>

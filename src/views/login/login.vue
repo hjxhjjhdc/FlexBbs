@@ -1,34 +1,57 @@
 <template>
-  <a-form
-    ref="formRef"
-    :model="formState"
-    :rules="rules"
-    :label-col="labelCol"
-    :wrapper-col="wrapperCol"
-  >
-    <a-form-item ref="name" label="UserName" name="username">
-      <a-input v-model:value="formState.name" />
-    </a-form-item>
-    <a-form-item label="PassWord" name="password">
-      <a-input v-model:value="formState.password" />
-    </a-form-item>
-    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-      <a-button type="primary" @click="onSubmit">Create</a-button>
-      <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
-    </a-form-item>
-  </a-form>
+  <div style="position: relative; width: 100%; height: 100%">
+    <a-card class="card">
+      <a-form
+        ref="formRef"
+        :model="formState"
+        :rules="rules"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-item label="UserName:" name="username" required>
+          <a-input v-model:value="formState.username" @keyup.enter="onSubmit" />
+        </a-form-item>
+        <a-form-item label="PassWord:" name="password" required>
+          <a-input-password
+            v-model:value="formState.password"
+            @keyup.enter="onSubmit"
+          />
+        </a-form-item>
+        <a-form-item :wrapper-col="{ span: 12, offset: 4 }">
+          <a-button
+            type="primary"
+            :loading="iconLoading"
+            @click="onSubmit"
+            shape="round"
+          >
+            Create</a-button
+          >
+          <a-button style="margin-left: 10px" @click="resetForm" shape="round"
+            >Reset</a-button
+          >
+        </a-form-item>
+      </a-form>
+    </a-card>
+  </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, reactive, ref, toRaw } from "vue";
 import type { UnwrapRef } from "vue";
+import { userloginMock } from "@/api/api";
+import { useRouter } from "vue-router";
+import { message } from "ant-design-vue";
 
 interface FormState {
   username: string;
   password: string;
 }
+interface DelayLoading {
+  delay: number;
+}
 export default defineComponent({
   setup() {
+    const router = useRouter();
     const formRef = ref();
     const formState: UnwrapRef<FormState> = reactive({
       username: "",
@@ -41,7 +64,6 @@ export default defineComponent({
           message: "Please input UserName",
           trigger: "blur",
         },
-        { min: 6, max: 12, message: "Length should be 6 to 12", trigger: "blur" },
       ],
       password: [
         {
@@ -55,7 +77,33 @@ export default defineComponent({
       formRef.value
         .validate()
         .then(() => {
-          console.log("values", formState, toRaw(formState));
+          let params: any = {
+            username: formState.username,
+            password: formState.password,
+          };
+          iconLoading.value = { delay: 500 };
+          setTimeout(() => {
+            iconLoading.value = false;
+            //接口
+            userloginMock(params)
+              .then((res: any) => {
+                console.log(res);
+                let { code,message } = res.data;
+                if (code == 200) {
+                  // alert('success')
+                  message.success("登录成功");
+                  router.push("HomePage");
+                } else {
+                  message.error(`${message}`);
+                }
+                formRef.value.resetFields();
+              })
+              .catch((_: any) => {
+                console.log(_);
+                formRef.value.resetFields();
+              });
+          }, 2000);
+          //   console.log("values", formState, toRaw(formState));
         })
         .catch((error: any) => {
           console.log("error", error);
@@ -64,6 +112,8 @@ export default defineComponent({
     const resetForm = () => {
       formRef.value.resetFields();
     };
+
+    const iconLoading = ref<boolean | DelayLoading>(false);
     return {
       formRef,
       labelCol: { span: 4 },
@@ -73,10 +123,20 @@ export default defineComponent({
       rules,
       onSubmit,
       resetForm,
+      loading: ref(false),
+      iconLoading,
     };
   },
 });
 </script>
 
-<style>
+<style lang="less" scoped>
+.card {
+  width: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 20px;
+}
 </style>
