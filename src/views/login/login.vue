@@ -92,7 +92,7 @@ export default defineComponent({
                 if (code == 200) {
                   // alert('success')
                   message.success("登录成功");
-                  router.replace("HomePage");
+                  router.replace("");
                 } else {
                   message.error(`${message}`);
                 }
