@@ -88,13 +88,13 @@ export default defineComponent({
             userloginMock(params)
               .then((res: any) => {
                 console.log(res);
-                let { code,message } = res.data;
+                let { code,msg } = res.data;
                 if (code == 200) {
                   // alert('success')
                   message.success("登录成功");
-                  router.replace("");
+                  router.replace({name:"HomePage"});
                 } else {
-                  message.error(`${message}`);
+                  message.error(`${msg}`);
                 }
                 formRef.value.resetFields();
               })

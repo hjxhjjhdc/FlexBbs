@@ -8,7 +8,7 @@ import {
 const Route: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/HomePage'
     },
     {
         name: 'Login',
