@@ -1,10 +1,10 @@
 <template>
   <a-layout>
-    <a-layout-header class="layoutContent">
-      <Header class="myContent"/>
+    <a-layout-header class="flex myHeader">
+      <Header class="content"/>
     </a-layout-header>
-    <a-layout-content class="layoutContent">
-      <MyContent class="myContent"/>
+    <a-layout-content class="flex layoutContent">
+      <MyContent class="content myContent"/>
     </a-layout-content>
     <a-layout-footer>
       <Footer/>
@@ -23,13 +23,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.layoutContent {
+.flex{
   display: flex;
   justify-content: center;
-
-  .myContent {
+  .content{
     width: 80%;
   }
+}
+.layoutContent {
+  .myContent {
+margin-top: 64px;
+  }
+}
+.myHeader{
+ position: fixed;
+  z-index: 9;
+  width: 100% ;
+  background-color:transparent;
+  overflow: hidden;
 }
 
 </style>

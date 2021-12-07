@@ -1,18 +1,21 @@
 <template>
   <div style=" padding: 20px">
     <a-row :gutter="16">
+<!--      left-->
       <a-col :span="5">
-        <a-card title="Card title" :bordered="false">
-          <p>card content</p>
+        <a-card  :bordered="false">
+          <myAside></myAside>
         </a-card>
       </a-col>
+<!--      center-->
       <a-col :span="14">
-        <a-card title="Card title" :bordered="false">
-          <p>card content</p>
+        <a-card  :bordered="false">
+          <p style="height: 1000px">card content</p>
         </a-card>
       </a-col>
+<!--      right-->
       <a-col :span="5">
-        <a-card title="Card title" :bordered="false">
+        <a-card  :bordered="false">
           <p>card content</p>
         </a-card>
       </a-col>
@@ -21,7 +24,10 @@
 </template>
 
 <script>
+import myAside from "./aside.vue";
 export default {
+name:'content',
+  components:{myAside}
 
 }
 </script>
