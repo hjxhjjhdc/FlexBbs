@@ -34,15 +34,15 @@ export default defineComponent({
 
 <style lang="less" scoped>
 *{
-  background-color: transparent !important;
+  //background-color: transparent !important;
 }
 .backgroundBlur{
 position: absolute;
-  width: 100%;
+ /* width: 100%;
   height: 300px;
   top: -150px;
   background-color: #fff !important;
-  filter: blur(70px);
+  filter: blur(70px);*/
 
 }
 

@@ -39,7 +39,7 @@ margin-top: 64px;
  position: fixed;
   z-index: 9;
   width: 100% ;
-  background-color:transparent;
+  //background-color:transparent;
   overflow: hidden;
 }
 
