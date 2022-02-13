@@ -8,7 +8,7 @@ import {
 const Route: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/HomePage'
+        redirect: '/index'
     },
     {
         name: 'Login',
@@ -18,8 +18,15 @@ const Route: Array<RouteRecordRaw> = [
     {
         name: 'HomePage',
         path: '/HomePage',
+        redirect:'/index',
         component: () => import('@/views/layout/index.vue'),
-        children: []
+        children: [
+            {
+                name:`FirstPage`,
+                path:`/index`,
+                component:()=>import(`@/views/firstPage/index.vue`)
+            }
+        ]
     }
 ]
 const router = createRouter({

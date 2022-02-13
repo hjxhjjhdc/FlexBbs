@@ -1,5 +1,5 @@
 <template>
-  <a-layout>
+  <a-layout class="layout">
     <a-layout-header class="flex myHeader">
       <Header class="content"/>
     </a-layout-header>
@@ -23,24 +23,30 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.flex{
+.flex {
   display: flex;
   justify-content: center;
-  .content{
+
+  .content {
     width: 80%;
   }
 }
+
 .layoutContent {
   .myContent {
-margin-top: 64px;
+    margin-top: 64px;
   }
 }
-.myHeader{
- position: fixed;
+
+.myHeader {
+  position: fixed;
   z-index: 9;
-  width: 100% ;
+  width: 100%;
   //background-color:transparent;
+  opacity:.8;
   overflow: hidden;
 }
-
+.layout{
+  min-height: 100vh;
+}
 </style>
